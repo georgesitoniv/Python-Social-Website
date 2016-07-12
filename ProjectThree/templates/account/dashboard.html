@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+
+
+
+    <nav  class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Dashboard</a>
+            </div>
+
+           
+            <div class="collapse navbar-collapse" id="#bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                  {% if request.user.is_authenticated %}
+                    <li role="presentation" {% if section == "dashboard" %}class="selected"{% endif %}>
+                      <a href="{% url 'account:dashboard' %}">My dashboard</a>
+                    </li>
+                    <li role="presentation" {% if section == "images" %}class="selected"{% endif %}>
+                      <a href="#">Images</a>
+                    </li>
+                    <li role="presentation" {% if section == "people" %}class="selected"{% endif %}>
+                      <a href="#">People</a>
+                    </li>
+
+                    {% endif %}
+                    
+                      <li role = "presentation" class="dropdown" style="float:right; padding-right:10px;">
+                       
+                        <a class="dropdown-toggle" data-toggle="dropdown" data-target="#drop" role="button" aria-expanded="false">
+                          Hello {{ request.user.first_name }},
+                        <span class="caret"></span></a>
+
+                        <ul class="dropdown-menu" id="drop">
+                          <li>
+                            <a href="{% url 'account:edit' %}">Edit Profile</a>
+                          </li>
+                          <li>
+                            {% if request.user.is_authenticated %}
+                              <a href="{% url 'account:logout' %}">Logout</a>
+                            {% else %}
+                              <a href="{% url 'account:login' %}">Log-in</a>
+                            {% endif %}
+                          </li>
+             
+                        </ul>
+ 
+                      </li>
+     
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+
+
+
+  <section style="padding-top:80px;">
+    <div class="container">
+        <p>Welcome to your dashboard.<p>
+        <a href="{% url 'account:edit' %}">Edit Profile</a>
+         <a href="{% url 'account:logout' %}">Logout</a>
+    <div>
+  </section>
+
+
+{% endblock %}
+

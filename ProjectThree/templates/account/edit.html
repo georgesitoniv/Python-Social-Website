@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}Edit your information{% endblock %}
+
+{% block content %}
+  <div class = "container" style="padding-left:30%;padding-right:30%;">
+
+
+    <div class="panel panel-default"  style="">
+      <div class="panel-heading" style="background-color:rgb(100,100,255);text-align:center">Edit your account information</div>
+      <div class="panel-body">
+
+        <form class="form-horizontal" action="."  method = "POST" enctype="multipart/form-data" role="form" style = "text-align:left;">
+          {% csrf_token %}
+          {% for field in user_form %}
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-4">
+                  {{field.label}}:
+                </div>
+                <div class="col-sm-offset-1 col-sm-3">
+                  {{field}}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+          {% for field in profile_form %}
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-offset-1 col-sm-4">
+                  {{field.label}}:
+                </div>
+                <div class="col-sm-offset-1 col-sm-3">
+                  {{field}}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+
+
+
+          <br>
+           <div class="form-group">
+             <div class="col-sm-offset-5 col-sm-5">
+               <button type="submit" class="btn btn-default">Save Changes</button>
+             </div>
+           </div>
+        </form>
+         <a href="{% url 'account:dashboard' %}">Back</a>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
